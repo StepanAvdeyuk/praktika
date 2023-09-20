@@ -1,0 +1,252 @@
+{% extends 'main/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}
+    Осциллограф 
+{% endblock %}
+
+{% block url %}
+    <!-- <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a> -->
+{% endblock %}
+
+{% block content %}
+<form method="post" id="createDataForm" data-url="{% url 'scope' %}">
+    <div class="container">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <h3 class="mb-4">Осциллограф</h3>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Канал 1</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">2</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">3</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false">4</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content mt-4" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Отобразить на графике</label>
+                            <div class="">
+                                {% render_field form.show_graph id="show_graph" class="form-control"%}                       
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">CH Scale</label>
+                            <div>
+                                {% render_field form.ch_scale id="ch_scale" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">TimeBase</label>
+                            <div class="">
+                                {% render_field form.time_base id="time_base" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Offset X</label>
+                            <div class="">
+                                {% render_field form.offset_x id="offset_x" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Offset Y</label>
+                            <div class="">
+                                {% render_field form.offset_y id="offset_y" class="form-control"%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Отобразить на графике</label>
+                            <div class="">
+                                {% render_field form.show_graph2 id="show_graph2" class="form-control"%}                       
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">CH Scale</label>
+                            <div>
+                                {% render_field form.ch_scale2 id="ch_scale2" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">TimeBase</label>
+                            <div class="">
+                                {% render_field form.time_base2 id="time_base2" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Offset X</label>
+                            <div class="">
+                                {% render_field form.offset_x2 id="offset_x2" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Offset Y</label>
+                            <div class="">
+                                {% render_field form.offset_y2 id="offset_y2" class="form-control"%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Отобразить на графике</label>
+                            <div class="">
+                                {% render_field form.show_graph3 id="show_graph3" class="form-control"%}                       
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">CH Scale</label>
+                            <div>
+                                {% render_field form.ch_scale3 id="ch_scale3" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">TimeBase</label>
+                            <div class="">
+                                {% render_field form.time_base3 id="time_base3" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Offset X</label>
+                            <div class="">
+                                {% render_field form.offset_x3 id="offset_x3" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Offset Y</label>
+                            <div class="">
+                                {% render_field form.offset_y3 id="offset_y3" class="form-control"%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Отобразить на графике</label>
+                            <div class="">
+                                {% render_field form.show_graph4 id="show_graph4" class="form-control"%}                       
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">CH Scale</label>
+                            <div>
+                                {% render_field form.ch_scale4 id="ch_scale4" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">TimeBase</label>
+                            <div class="">
+                                {% render_field form.time_base4 id="time_base4" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Offset X</label>
+                            <div class="">
+                                {% render_field form.offset_x4 id="offset_x4" class="form-control"%}
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex justify-content-between px-3">
+                            <label class="col-form-label">Offset Y</label>
+                            <div class="">
+                                {% render_field form.offset_y4 id="offset_y4" class="form-control"%}
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+        
+            </div>
+            <div class="col">
+                <h3 class="mb-4">Генератор</h3>
+
+                <div class="form-group row d-flex justify-content-between px-3">
+                    <label class="col-form-label">Частота, Гц</label>
+                    <div class="">
+                        {% render_field form2.frequency id="frequency" class="form-control"%}
+                    </div>
+                </div>
+        
+                <div class="form-group row d-flex justify-content-between px-3">
+                    <label class="col-form-label">Амплитуда, В</label>
+                    <div class="">
+                        {% render_field form2.amplitude id="amplitude" class="form-control"%}
+                    </div>
+                </div>
+        
+                <div class="form-group row d-flex justify-content-between px-3">
+                    <label class="col-form-label">Форма</label>
+                    <div class="">
+                        {% render_field form2.sig_form id="sig_form" class="form-control"%}
+                    </div>
+                </div>
+        
+                <div class="form-group row d-flex justify-content-between px-3">
+                    <label class="col-form-label">Канал</label>
+                    <div class="">
+                        {% render_field form2.channel id="channel" class="form-control"%}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h3 class="mb-4">Источник питания</h3>
+
+                <div class="form-group row d-flex justify-content-between px-3">
+                    <label class="col-form-label">Канал</label>
+                    <div class="">
+                        {% render_field form3.power_channel id="power_channel" class="form-control"%}                       
+                    </div>
+                </div>
+
+                <div class="form-group row d-flex justify-content-between px-3">
+                    <label class=" col-form-label">DC</label>
+                    <div class="">
+                        {% render_field form3.voltage id="voltage" class="form-control"%}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end"><button type="submit" id="submitButton" class="btn btn-success btn-lg">Отправить</button></div>
+         </div>
+</form>
+    {% if graph %}
+        <hr>
+        <div class="container">
+            <h3>График</h3>
+            {{ graph|safe }}
+        </div>
+    {% endif %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+{% comment %} <script src="{% static 'js/todo.js' %}"> 
+</script> {% endcomment %}  
+<br>
+{% comment %} <div class="container" id="resultPhoto">
+
+</div> {% endcomment %}
+{% endblock %}

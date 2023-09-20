@@ -1,0 +1,34 @@
+<!doctype html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="https://www.hse.ru/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-5 bg-light border-bottom shadow-sm">
+        <p class="d-flex align-items-center">
+            <a href="https://miem.hse.ru">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Логотип_МИЭМ.svg"
+                     width="50" height="50" border="0" alt="Пример">
+            </a>
+        </p>
+        <!-- <h4 class="my-0 mr-md-auto font-weight-normal">Проект #659</h4> -->
+      <nav class="my-2 my-md-0 mr-md-3">
+        {% block url %}{% endblock %}
+      </nav>
+<!--        {% if request.user.is_authenticated %}
+            <span>Привет, {{request.user}}  </span>
+            <a class="btn btn-outline-secondary" href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'login' %}">Войти</a>
+        {% endif%}-->
+    </div>
+    {% block content %}{% endblock %}
+</body>
+</html>
